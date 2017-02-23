@@ -12,6 +12,10 @@ public class Balloon {
 		inflated = newInflated;
 	}
 	
+	Balloon() {
+		
+	}
+	
 	int getSize() {
 		return size;
 	}
