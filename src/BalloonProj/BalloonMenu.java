@@ -76,7 +76,7 @@ public class BalloonMenu {
                 			//capture input
                 			inflateChoice = fnput.nextInt();
                 			//testing if input is a valid int
-                            if (1 <= inflateChoice && inflateChoice <= BalloonTest.getMaxArraySize()) 
+                            if (1 <= inflateChoice && inflateChoice <= balloons.size()) 
                             {
                             	inflateChoice--;
                             	//if balloon exists in array
@@ -97,7 +97,7 @@ public class BalloonMenu {
                             } 
                             else 
                             {
-                                System.out.println("Please enter a valid value");
+                                System.out.println("Please enter a valid balloon");
                             }
                         } 
                 		//catch invalid input from scanner
