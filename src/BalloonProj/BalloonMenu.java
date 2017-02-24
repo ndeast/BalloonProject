@@ -27,8 +27,17 @@ public class BalloonMenu {
             System.out.println("(6) Quit");
             System.out.print("Enter your choice: ");
 
-            // Get the user input and convert to upper case
-            	choice = fnput.nextInt();
+            try 
+    		{
+    			//capture input
+    			choice = fnput.nextInt();
+            } 
+    		//catch invalid input from scanner
+    		catch (InputMismatchException e) 
+    		{
+                //clear/reset scanner to be ready to receive input again
+                fnput.next();
+            }
 
             // Switch based on the option
             switch (choice) {
@@ -118,7 +127,7 @@ public class BalloonMenu {
                 			//capture input
                 			killChoice = fnput.nextInt();
                 			//test if int is within valid size
-                            if (1 <= killChoice && killChoice <= BalloonTest.getMaxArraySize()) 
+                            if (1 <= killChoice && killChoice <= balloons.size()) 
                             {
                             	//value is stepped back so that 1 = 0 in array
                             	killChoice--;
@@ -131,7 +140,7 @@ public class BalloonMenu {
                             } 
                             else 
                             {
-                                System.out.println("Please enter a valid value");
+                                System.out.println("Please enter a valid balloon");
                             }
                         } 
                 		catch (InputMismatchException e) 
@@ -156,9 +165,9 @@ public class BalloonMenu {
                     break;    
 
                 default:
-                    System.out.println("Option " + choice + " is not available");              
+                    System.out.println("\nOption is not available");              
             }
         } while (choice != 6);
-        System.out.printf("Thanks for visiting the Party World Balloon Generator Hotline WebApp SaaS");
+        System.out.printf("Thanks for visiting Party Balloon Generator");
 	}
 }
