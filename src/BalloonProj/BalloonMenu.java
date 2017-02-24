@@ -8,10 +8,11 @@ public class BalloonMenu {
 	
 	public static void mainMenu() {
 		
-		BalloonTest m1 = new BalloonTest();
-	    ArrayList<Balloon> balloons = m1.balloonArray();
+		BalloonTest bClass = new BalloonTest();
+	    ArrayList<Balloon> balloons = bClass.balloonArray();
 		Scanner fnput = new Scanner(System.in);
 		int choice;
+		int killChoice=0;
 		
 		System.out.println("Welcome to the Balloon Generator");
 		do {
@@ -32,7 +33,8 @@ public class BalloonMenu {
             switch (choice) {
                 // Create a new Balloon if ArrayList is not full
                 case 1:
-                	if(balloons.size() != 5)
+                	boolean arrayFull = BalloonTest.isArrayFull(balloons);
+                	if(arrayFull)
                 	{
                 		Balloon BalloonNew = BalloonTest.balloonCreator();
                         balloons.add(BalloonNew);
@@ -54,13 +56,45 @@ public class BalloonMenu {
                 // Inflate a specific balloon
                 case 3:
                 	Balloon BalloonNew = BalloonTest.balloonCreator();
-                	if(BalloonTest.isValidBalloon(BalloonNew, balloons))
-                	
+                	while(BalloonTest.isValidBalloon(BalloonNew, balloons)) 
+                	{
+                		if(BalloonTest.isBalloonInflated(BalloonNew))
+                		{
+                			
+                		}
+                	}
+             
                     break;
 
                 // Destroy a specific balloon
                 case 4:
-                   
+                	if((balloons.size() >= 1) && (balloons.size() <= 5))
+                	{	
+                		do
+                		{
+		                	System.out.println("Which Number Balloon would you like to destroy?");
+		                	
+		                	killChoice = fnput.nextInt();
+		                	
+		                	//killChoice--;
+		                	
+		                
+		                	/*else
+		                	{
+		                		System.out.println("You have entered an invalid balloon number");
+		                	}*/
+                		} while((killChoice >= 1) && (balloons.size() <= 5));
+                		
+                		if(BalloonTest.isValidBalloon(balloons.get(killChoice), balloons))
+	                	{
+	                		BalloonTest.destroyBalloon(balloons, (killChoice));
+	                	}
+                	} 
+                	else
+                	{
+                		System.out.println("There are no Balloons left to destroy");
+                	}
+                		
                     break;
 
                 // Print the current number of balloons
@@ -81,7 +115,7 @@ public class BalloonMenu {
 
         } while (choice != 6);
         System.out.printf("Thanks for visiting Party City");
-        System.out.println(balloons.get(0).getColor());
+        //System.out.println(balloons.get(0).getColor());
 		
 		
 		

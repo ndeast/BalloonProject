@@ -4,24 +4,28 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class BalloonTest {
-
+private static final int maxArraySize = 5;
+private static int[] validSizes = new int[] {6, 8, 10, 12};
+private static String[] validColors = new String[] {"RED", "BLUE", "GREEN", "YELLOW"};
+private static Scanner fnput = new Scanner(System.in);
 
 //returns true if array is already filled with objects
-public boolean isArrayFull(Balloon[] newBalloon) {	
-	boolean isFull = true;
-	for(Balloon s : newBalloon) {
-	    if(s == null) {
-	        isFull = false;
-	        break;
-	    }
+public static boolean isArrayFull(ArrayList<Balloon> balloonArray) {	
+	boolean isFull = false;
+	if(balloonArray.size() != maxArraySize)
+	{
+		isFull = true;
 	}
-	return isFull;
+	else
+	{
+		isFull = false;
+	}
+	return isFull;	
 }
 
 //Test if chosen size for a balloon is valid
 public static boolean isValidSize(int newSize) {
 	boolean isValid = false;
-	int[] validSizes = new int[] {6, 8, 10, 12};
 			
 	for(int i=0;i<validSizes.length;i++){
 		if(newSize == validSizes[i]) {
@@ -35,12 +39,13 @@ public static boolean isValidSize(int newSize) {
 //Test if the chosen color for a balloon is valid
 public static boolean isValidColor(String newColor) {
 	boolean isValid = false;
-	String[] validColors = new String[] {"RED", "BLUE", "GREEN", "YELLOW"};
 	
 	newColor = newColor.toUpperCase();
 	
-	for(int i=0;i<validColors.length;i++) {
-		if(newColor.equals(validColors[i])) {
+	for(int i=0;i<validColors.length;i++) 
+	{
+		if(newColor.equals(validColors[i])) 
+		{
 			isValid = true;
 			break;
 		}
@@ -63,79 +68,86 @@ public static String toString(Balloon newBalloon){
 
 //returns true if balloon object is inflated
 public static boolean isBalloonInflated(Balloon newBalloon) {
-	boolean isInflated;
+	boolean isInflated = newBalloon.getInflation();
 	
-	if(newBalloon.getInflation()) {
-		isInflated = true;
-	}
-	else {
-		isInflated = false;
-	}
 	return isInflated;
 }
 
-//returns true if new balloon object is not already in balloon array
+//returns true if new balloon object is already in balloon array
 public static boolean isValidBalloon(Balloon newBalloon, ArrayList<Balloon> balloonArray) {
 	boolean isValid = false;
 	for(int i = 0; i < balloonArray.size(); i++)
 	{
-		if(newBalloon != balloonArray.get(i))
+		if(newBalloon == balloonArray.get(i))
 		{
-			isValid = false;
+			isValid = true;
 			break;
 		}
 		else
 		{
-			isValid = true;
+			isValid = false;
 		}
 	}
 	return isValid;
 }
 
+//prompts to generate a new balloon
 public static Balloon balloonCreator() {
-	Scanner fnput = new Scanner(System.in);
 	int size = 0;
-	String color = "null";
-	
-	System.out.println("Please one of the following colors: ");
-	System.out.println("\nRed, Blue, Green, Yellow: ");
-	
-	String newColor = fnput.next();
-    if(isValidColor(newColor))
-    {
-    	color = newColor;
-    }
-    else
-    {
-    	System.out.println("Please enter a valid color!");
-    }
-    System.out.println("Please one of the following sizes: ");
-	System.out.println("\n6, 8, 10, 12: ");
-	
-	int newSize = fnput.nextInt();
-	
-	if(isValidSize(newSize))
+	String color = "";
+	do
 	{
-		size = newSize;
-	}
-	else
-	{
-		System.out.println("Please enter a valid size!");
-	}
+		System.out.println("Please one of the following colors: ");
+		System.out.println("\nRed, Blue, Green, Yellow: ");
+		
+		String newColor = fnput.next();
+	    if(isValidColor(newColor))
+	    {
+	    	color = newColor;
+	    }
+	    else
+	    {
+	    	System.out.println("Please enter a valid color!");
+	    }
+	} while(!isValidColor(color));
 	
+	do
+	{
+	    System.out.println("Please one of the following sizes: ");
+		System.out.println("\n6, 8, 10, 12: ");
+		if(fnput.hasNextInt())
+		{
+			int newSize = fnput.nextInt();
+			
+			if(isValidSize(newSize))
+			{
+				size = newSize;
+			}
+			else
+			{
+				System.out.println("Please enter a valid size!");
+			}
+		}
+	} while(!isValidSize(size));
 	Balloon newBalloon = new Balloon(size, color, false);
 	
 	return newBalloon;
 	
 }
 
-public ArrayList<Balloon> balloonArray() {
-	ArrayList<Balloon> balloons = new ArrayList<Balloon>();	
-return balloons;
+public static void destroyBalloon(ArrayList <Balloon> newBArray, int killChoice) {
+	
+	newBArray.remove(killChoice);
+	
+	System.out.println("Balloon #" + (killChoice+1) + " has been destroyed");
+	
 }
 
+public ArrayList<Balloon> balloonArray() {
+	ArrayList<Balloon> balloons = new ArrayList<Balloon>();	
 
-
+	return balloons;
+}
 
 }
 

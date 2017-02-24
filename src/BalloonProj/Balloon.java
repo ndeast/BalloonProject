@@ -28,16 +28,16 @@ public class Balloon {
 		return color;
 	}
 	
-	void setColor(String newColor) {
-		color = newColor;
+	void setColor(String newerColor) {
+		color = newerColor;
 	}
 	
-	void setSize(int newSize) {
-		size = newSize;
+	void setSize(int newerSize) {
+		size = newerSize;
 	}
 	
-	void setInflation(boolean newInflation) {
-		inflated = newInflation;
+	void setInflation(boolean newerInflation) {
+		inflated = newerInflation;
 	}
 
 }
