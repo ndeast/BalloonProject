@@ -2,21 +2,23 @@ package BalloonProj;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class BalloonMenu {
 
+	private static BalloonTest bClass = new BalloonTest();
+    private static ArrayList<Balloon> balloons = bClass.balloonArray();
+	private static Scanner fnput = new Scanner(System.in);
+	private static int choice;
+	private static int killChoice=0;
+	private static int inflateChoice=0;
 	
 	public static void mainMenu() {
-		
-		BalloonTest bClass = new BalloonTest();
-	    ArrayList<Balloon> balloons = bClass.balloonArray();
-		Scanner fnput = new Scanner(System.in);
-		int choice;
-		int killChoice=0;
-		
+
 		System.out.println("Welcome to the Balloon Generator");
 		do {
             // Prompt the user for a choice
+			System.out.println("\nPlease make a selection");
             System.out.println("(1) Create a new Balloon");
             System.out.println("(2) List all created Balloons");
             System.out.println("(3) Inflate a Balloon");
@@ -26,9 +28,8 @@ public class BalloonMenu {
             System.out.print("Enter your choice: ");
 
             // Get the user input and convert to upper case
-            choice = fnput.nextInt();
-         
-           
+            	choice = fnput.nextInt();
+
             // Switch based on the option
             switch (choice) {
                 // Create a new Balloon if ArrayList is not full
@@ -55,40 +56,90 @@ public class BalloonMenu {
 
                 // Inflate a specific balloon
                 case 3:
-                	Balloon BalloonNew = BalloonTest.balloonCreator();
-                	while(BalloonTest.isValidBalloon(BalloonNew, balloons)) 
-                	{
-                		if(BalloonTest.isBalloonInflated(BalloonNew))
+                	
+                	//ensure that there are any balloons in the array
+                	if((balloons.size() >= 1) && (balloons.size() <= BalloonTest.getMaxArraySize()))
+                	{	
+                		System.out.println("Which Number Balloon would you like to inflate?");
+                		
+                		//Try to receive valid integer input within size of array otherwise catch exception
+                		try 
                 		{
-                			
-                		}
+                			//capture input
+                			inflateChoice = fnput.nextInt();
+                			//testing if input is a valid int
+                            if (1 <= inflateChoice && inflateChoice <= BalloonTest.getMaxArraySize()) 
+                            {
+                            	inflateChoice--;
+                            	//if balloon exists in array
+                            	if(BalloonTest.isValidBalloon(balloons.get(inflateChoice), balloons))
+        	                	{	
+                            		//if balloon is not inflated 
+        	                		if(!BalloonTest.isBalloonInflated(balloons, (inflateChoice)))
+        	                		{
+        	                			//inflate balloon
+        	                			BalloonTest.inflateBalloon(balloons, inflateChoice);
+        	                		}
+        	                		else
+        	                		{
+        	                			System.out.println("Balloon is already inflated!");
+        	                			break;
+        	                		}
+        	                	}
+                            } 
+                            else 
+                            {
+                                System.out.println("Please enter a valid value");
+                            }
+                        } 
+                		//catch invalid input from scanner
+                		catch (InputMismatchException e) 
+                		{
+                            System.out.println("Input was not a valid number");
+                            //clear/reset scanner to be ready to receive input again
+                            fnput.next();
+                        }
+                	} 
+                	else
+                	{
+                		System.out.println("There are no Balloons left to inflate");
                 	}
-             
                     break;
 
                 // Destroy a specific balloon
                 case 4:
-                	if((balloons.size() >= 1) && (balloons.size() <= 5))
+                	//ensure that the ArrayList contains any balloons at all
+                	if((balloons.size() >= 1) && (balloons.size() <= BalloonTest.getMaxArraySize()))
                 	{	
-                		do
-                		{
-		                	System.out.println("Which Number Balloon would you like to destroy?");
-		                	
-		                	killChoice = fnput.nextInt();
-		                	
-		                	//killChoice--;
-		                	
-		                
-		                	/*else
-		                	{
-		                		System.out.println("You have entered an invalid balloon number");
-		                	}*/
-                		} while((killChoice >= 1) && (balloons.size() <= 5));
+                		System.out.println("Which Number Balloon would you like to destroy?");
                 		
-                		if(BalloonTest.isValidBalloon(balloons.get(killChoice), balloons))
-	                	{
-	                		BalloonTest.destroyBalloon(balloons, (killChoice));
-	                	}
+                		//Try to receive valid integer input within size of array otherwise catch exception
+                		try 
+                		{
+                			//capture input
+                			killChoice = fnput.nextInt();
+                			//test if int is within valid size
+                            if (1 <= killChoice && killChoice <= BalloonTest.getMaxArraySize()) 
+                            {
+                            	//value is stepped back so that 1 = 0 in array
+                            	killChoice--;
+                            	//if balloon is found in array
+                            	if(BalloonTest.isValidBalloon(balloons.get(killChoice), balloons))
+        	                	{
+                            		//remove balloon from array
+        	                		BalloonTest.destroyBalloon(balloons, (killChoice));
+        	                	}
+                            } 
+                            else 
+                            {
+                                System.out.println("Please enter a valid value");
+                            }
+                        } 
+                		catch (InputMismatchException e) 
+                		{
+                            System.out.println("Input was not a valid number");
+                            fnput.next();
+                        }
                 	} 
                 	else
                 	{
@@ -97,14 +148,13 @@ public class BalloonMenu {
                 		
                     break;
 
-                // Print the current number of balloons
+                // Print out the current number of balloons in the balloons array
                 case 5:
                     System.out.println("You currently have: " + balloons.size() + " balloons created\n");
                     break;
                 
                 //Quit out of the menu
                 case 6:
-                    
                     break;    
 
                 default:
@@ -114,17 +164,8 @@ public class BalloonMenu {
 
 
         } while (choice != 6);
-        System.out.printf("Thanks for visiting Party City");
-        //System.out.println(balloons.get(0).getColor());
-		
-		
-		
-		
-		
-		
-		
-		
-		
+        System.out.printf("Thanks for visiting the Party World Balloon Generator Hotline WebApp SaaS");
+
 	}
 	
 	

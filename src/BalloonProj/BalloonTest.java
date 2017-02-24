@@ -12,6 +12,7 @@ private static Scanner fnput = new Scanner(System.in);
 //returns true if array is already filled with objects
 public static boolean isArrayFull(ArrayList<Balloon> balloonArray) {	
 	boolean isFull = false;
+	//tests the ArrayList against the maximum value wanted for array
 	if(balloonArray.size() != maxArraySize)
 	{
 		isFull = true;
@@ -39,11 +40,13 @@ public static boolean isValidSize(int newSize) {
 //Test if the chosen color for a balloon is valid
 public static boolean isValidColor(String newColor) {
 	boolean isValid = false;
-	
+	//sets user input to uppercase
 	newColor = newColor.toUpperCase();
 	
 	for(int i=0;i<validColors.length;i++) 
 	{
+		//if selected color is valid input as compared to 
+		//an array of strings
 		if(newColor.equals(validColors[i])) 
 		{
 			isValid = true;
@@ -61,15 +64,15 @@ public static boolean isValidColor(String newColor) {
 public static String toString(Balloon newBalloon){
 	
 	String balloonString = ":\nSize: " + newBalloon.getSize() +
-		"\nColor: " + newBalloon.getColor() + "\nInflated: " + newBalloon.getInflation() + "\n";
+		"\nColor: " + newBalloon.getColor() + "\nInflated: " + newBalloon.getInflation();
 	
 	return balloonString; 
 }
 
 //returns true if balloon object is inflated
-public static boolean isBalloonInflated(Balloon newBalloon) {
-	boolean isInflated = newBalloon.getInflation();
-	
+public static boolean isBalloonInflated(ArrayList<Balloon> balloonArray, int index) {
+	boolean isInflated = balloonArray.get(index).getInflation();
+
 	return isInflated;
 }
 
@@ -91,16 +94,18 @@ public static boolean isValidBalloon(Balloon newBalloon, ArrayList<Balloon> ball
 	return isValid;
 }
 
-//prompts to generate a new balloon
+//Menu to create a new balloon object
 public static Balloon balloonCreator() {
 	int size = 0;
 	String color = "";
 	do
 	{
-		System.out.println("Please one of the following colors: ");
+		System.out.println("Please enter one of the following colors: ");
 		System.out.println("\nRed, Blue, Green, Yellow: ");
 		
+		//receive input
 		String newColor = fnput.next();
+		//test if user input is a valid color
 	    if(isValidColor(newColor))
 	    {
 	    	color = newColor;
@@ -109,16 +114,18 @@ public static Balloon balloonCreator() {
 	    {
 	    	System.out.println("Please enter a valid color!");
 	    }
+	  //repeat menu until a valid color is entered
 	} while(!isValidColor(color));
 	
 	do
 	{
-	    System.out.println("Please one of the following sizes: ");
+	    System.out.println("Please enter one of the following sizes: ");
 		System.out.println("\n6, 8, 10, 12: ");
 		if(fnput.hasNextInt())
 		{
 			int newSize = fnput.nextInt();
 			
+			//test if size input is a valid size
 			if(isValidSize(newSize))
 			{
 				size = newSize;
@@ -128,13 +135,17 @@ public static Balloon balloonCreator() {
 				System.out.println("Please enter a valid size!");
 			}
 		}
+		//repeat menu until valid input is received
 	} while(!isValidSize(size));
+	
+	//create the balloon object from the received variables
 	Balloon newBalloon = new Balloon(size, color, false);
 	
 	return newBalloon;
 	
 }
 
+//remove specific balloon from an ArrayList
 public static void destroyBalloon(ArrayList <Balloon> newBArray, int killChoice) {
 	
 	newBArray.remove(killChoice);
@@ -143,10 +154,25 @@ public static void destroyBalloon(ArrayList <Balloon> newBArray, int killChoice)
 	
 }
 
+//set the inflated boolean on a balloon object from an ArrayList
+public static void inflateBalloon(ArrayList <Balloon> newBArray, int inflateChoice) {
+	
+	newBArray.get(inflateChoice).setInflation(true);
+	
+	System.out.println("Balloon #" + (inflateChoice+1) + " has been inflated");
+	
+}
+
+//create a balloon arraylist
 public ArrayList<Balloon> balloonArray() {
 	ArrayList<Balloon> balloons = new ArrayList<Balloon>();	
 
 	return balloons;
+}
+
+//get method for MaxArraySize
+static int getMaxArraySize() {
+	return maxArraySize;
 }
 
 }
