@@ -55,8 +55,7 @@ public class BalloonMenu {
                     break;
 
                 // Inflate a specific balloon
-                case 3:
-                	
+                case 3:	
                 	//ensure that there are any balloons in the array
                 	if((balloons.size() >= 1) && (balloons.size() <= BalloonTest.getMaxArraySize()))
                 	{	
@@ -144,8 +143,7 @@ public class BalloonMenu {
                 	else
                 	{
                 		System.out.println("There are no Balloons left to destroy");
-                	}
-                		
+                	}        		
                     break;
 
                 // Print out the current number of balloons in the balloons array
@@ -158,15 +156,9 @@ public class BalloonMenu {
                     break;    
 
                 default:
-                    System.out.println("Option " + choice + " is not available");
-                    
+                    System.out.println("Option " + choice + " is not available");              
             }
-
-
         } while (choice != 6);
         System.out.printf("Thanks for visiting the Party World Balloon Generator Hotline WebApp SaaS");
-
 	}
-	
-	
 }

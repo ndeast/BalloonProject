@@ -4,8 +4,7 @@ public class Balloon {
 	private int size = 6;
 	private String color = "red";
 	private boolean inflated = false;
-	
-	
+		
 	Balloon(int newSize, String newColor, boolean newInflated) {	
 		size = newSize;
 		color = newColor;
@@ -39,5 +38,4 @@ public class Balloon {
 	void setInflation(boolean newerInflation) {
 		inflated = newerInflation;
 	}
-
 }

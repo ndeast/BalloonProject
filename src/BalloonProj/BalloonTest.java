@@ -141,8 +141,7 @@ public static Balloon balloonCreator() {
 	//create the balloon object from the received variables
 	Balloon newBalloon = new Balloon(size, color, false);
 	
-	return newBalloon;
-	
+	return newBalloon;	
 }
 
 //remove specific balloon from an ArrayList
@@ -151,7 +150,6 @@ public static void destroyBalloon(ArrayList <Balloon> newBArray, int killChoice)
 	newBArray.remove(killChoice);
 	
 	System.out.println("Balloon #" + (killChoice+1) + " has been destroyed");
-	
 }
 
 //set the inflated boolean on a balloon object from an ArrayList
@@ -160,7 +158,6 @@ public static void inflateBalloon(ArrayList <Balloon> newBArray, int inflateChoi
 	newBArray.get(inflateChoice).setInflation(true);
 	
 	System.out.println("Balloon #" + (inflateChoice+1) + " has been inflated");
-	
 }
 
 //create a balloon arraylist
@@ -176,33 +173,3 @@ static int getMaxArraySize() {
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
