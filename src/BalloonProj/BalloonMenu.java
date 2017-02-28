@@ -10,8 +10,6 @@ public class BalloonMenu {
     private static ArrayList<Balloon> balloons = bClass.balloonArray();
 	private static Scanner fnput = new Scanner(System.in);
 	private static int choice;
-	private static int killChoice=0;
-	private static int inflateChoice=0;
 	
 	public static void mainMenu() {
 
@@ -43,121 +41,27 @@ public class BalloonMenu {
             switch (choice) {
                 // Create a new Balloon if ArrayList is not full
                 case 1:
-                	boolean arrayFull = BalloonTest.isArrayFull(balloons);
-                	if(arrayFull)
-                	{
-                		Balloon BalloonNew = BalloonTest.balloonCreator();
-                        balloons.add(BalloonNew);
-                	}
-                	else 
-                	{
-                		System.out.println("Sorry you already have your 5 balloons!");
-                	}
+                	BalloonMenuTest.createNewBalloon(balloons);
                     break;
 
                 // List all of the created balloons from the ArrayList
                 case 2:
-                    for(int i=0;i<balloons.size();i++)
-                    {
-                    	System.out.println("\nBalloon " + (i+1) + BalloonTest.toString(balloons.get(i)));
-                    }
+                    BalloonMenuTest.listCreatedBalloons(balloons);
                     break;
 
                 // Inflate a specific balloon
                 case 3:	
-                	//ensure that there are any balloons in the array
-                	if((balloons.size() >= 1) && (balloons.size() <= BalloonTest.getMaxArraySize()))
-                	{	
-                		System.out.println("Which Number Balloon would you like to inflate?");
-                		
-                		//Try to receive valid integer input within size of array otherwise catch exception
-                		try 
-                		{
-                			//capture input
-                			inflateChoice = fnput.nextInt();
-                			//testing if input is a valid int
-                            if (1 <= inflateChoice && inflateChoice <= BalloonTest.getMaxArraySize()) 
-                            {
-                            	inflateChoice--;
-                            	//if balloon exists in array
-                            	if(BalloonTest.isValidBalloon(balloons.get(inflateChoice), balloons))
-        	                	{	
-                            		//if balloon is not inflated 
-        	                		if(!BalloonTest.isBalloonInflated(balloons, (inflateChoice)))
-        	                		{
-        	                			//inflate balloon
-        	                			BalloonTest.inflateBalloon(balloons, inflateChoice);
-        	                		}
-        	                		else
-        	                		{
-        	                			System.out.println("Balloon is already inflated!");
-        	                			break;
-        	                		}
-        	                	}
-                            } 
-                            else 
-                            {
-                                System.out.println("Please enter a valid value");
-                            }
-                        } 
-                		//catch invalid input from scanner
-                		catch (InputMismatchException e) 
-                		{
-                            System.out.println("Input was not a valid number");
-                            //clear/reset scanner to be ready to receive input again
-                            fnput.next();
-                        }
-                	} 
-                	else
-                	{
-                		System.out.println("There are no Balloons left to inflate");
-                	}
+                	BalloonMenuTest.inflateBalloon(balloons);
                     break;
 
                 // Destroy a specific balloon
                 case 4:
-                	//ensure that the ArrayList contains any balloons at all
-                	if((balloons.size() >= 1) && (balloons.size() <= BalloonTest.getMaxArraySize()))
-                	{	
-                		System.out.println("Which Number Balloon would you like to destroy?");
-                		
-                		//Try to receive valid integer input within size of array otherwise catch exception
-                		try 
-                		{
-                			//capture input
-                			killChoice = fnput.nextInt();
-                			//test if int is within valid size
-                            if (1 <= killChoice && killChoice <= balloons.size()) 
-                            {
-                            	//value is stepped back so that 1 = 0 in array
-                            	killChoice--;
-                            	//if balloon is found in array
-                            	if(BalloonTest.isValidBalloon(balloons.get(killChoice), balloons))
-        	                	{
-                            		//remove balloon from array
-        	                		BalloonTest.destroyBalloon(balloons, (killChoice));
-        	                	}
-                            } 
-                            else 
-                            {
-                                System.out.println("Please enter a valid balloon");
-                            }
-                        } 
-                		catch (InputMismatchException e) 
-                		{
-                            System.out.println("Input was not a valid number");
-                            fnput.next();
-                        }
-                	} 
-                	else
-                	{
-                		System.out.println("There are no Balloons left to destroy");
-                	}        		
+                	BalloonMenuTest.destroyBalloon(balloons);        		
                     break;
 
                 // Print out the current number of balloons in the balloons array
                 case 5:
-                    System.out.println("You currently have: " + balloons.size() + " balloons created\n");
+                    BalloonMenuTest.printCurrentAmount(balloons);
                     break;
                 
                 //Quit out of the menu

@@ -160,7 +160,7 @@ public static void inflateBalloon(ArrayList <Balloon> newBArray, int inflateChoi
 	System.out.println("Balloon #" + (inflateChoice+1) + " has been inflated");
 }
 
-//create a balloon arraylist
+//create a balloon ArrayList
 public ArrayList<Balloon> balloonArray() {
 	ArrayList<Balloon> balloons = new ArrayList<Balloon>();	
 
