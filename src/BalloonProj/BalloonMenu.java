@@ -51,7 +51,57 @@ public class BalloonMenu {
 
                 // Inflate a specific balloon
                 case 3:	
+<<<<<<< HEAD
                 	BalloonMenuTest.inflateBalloon(balloons);
+=======
+                	//ensure that there are any balloons in the array
+                	if((balloons.size() >= 1) && (balloons.size() <= BalloonTest.getMaxArraySize()))
+                	{	
+                		System.out.println("Which Number Balloon would you like to inflate?");
+                		
+                		//Try to receive valid integer input within size of array otherwise catch exception
+                		try 
+                		{
+                			//capture input
+                			inflateChoice = fnput.nextInt();
+                			//testing if input is a valid int
+                            if (1 <= inflateChoice && inflateChoice <= balloons.size()) 
+                            {
+                            	inflateChoice--;
+                            	//if balloon exists in array
+                            	if(BalloonTest.isValidBalloon(balloons.get(inflateChoice), balloons))
+        	                	{	
+                            		//if balloon is not inflated 
+        	                		if(!BalloonTest.isBalloonInflated(balloons, (inflateChoice)))
+        	                		{
+        	                			//inflate balloon
+        	                			BalloonTest.inflateBalloon(balloons, inflateChoice);
+        	                		}
+        	                		else
+        	                		{
+        	                			System.out.println("Balloon is already inflated!");
+        	                			break;
+        	                		}
+        	                	}
+                            } 
+                            else 
+                            {
+                                System.out.println("Please enter a valid balloon");
+                            }
+                        } 
+                		//catch invalid input from scanner
+                		catch (InputMismatchException e) 
+                		{
+                            System.out.println("Input was not a valid number");
+                            //clear/reset scanner to be ready to receive input again
+                            fnput.next();
+                        }
+                	} 
+                	else
+                	{
+                		System.out.println("There are no Balloons left to inflate");
+                	}
+>>>>>>> origin/master
                     break;
 
                 // Destroy a specific balloon
