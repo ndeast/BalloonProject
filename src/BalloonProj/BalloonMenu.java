@@ -6,8 +6,7 @@ import java.util.InputMismatchException;
 
 public class BalloonMenu {
 
-	private static BalloonTest bClass = new BalloonTest();
-	private static ArrayList<Balloon> balloons = bClass.balloonArray();
+	private static ArrayList<Balloon> balloons = BalloonTest.balloonArray();
 	private static Scanner fnput = new Scanner(System.in);
 	private static int choice;
 

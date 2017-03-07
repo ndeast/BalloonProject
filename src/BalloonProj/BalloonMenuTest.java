@@ -31,7 +31,13 @@ public class BalloonMenuTest {
 		System.out.println("You currently have: " + balloonArray.size() + " balloons created\n");
 
 	}
-
+	
+	/** 
+	 * The next 2 methods need to be cleaned up
+	 * with their nested if's put into their own methods
+	 * 
+	 */
+	
 	public static void destroyBalloon(ArrayList<Balloon> balloonArray) {
 		// ensure that the ArrayList contains any balloons at all
 		if ((balloonArray.size() >= 1) && (balloonArray.size() <= BalloonTest.getMaxArraySize())) {

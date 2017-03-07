@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class BalloonTest {
+	
 	private static final int maxArraySize = 5;
 	private static int[] validSizes = new int[] { 6, 8, 10, 12 };
 	private static String[] validColors = new String[] { "RED", "BLUE", "GREEN", "YELLOW" };
@@ -37,7 +38,7 @@ public class BalloonTest {
 	// Test if the chosen color for a balloon is valid
 	public static boolean isValidColor(String newColor) {
 		boolean isValid = false;
-		// sets user input to uppercase
+		// sets user input to upper case
 		newColor = newColor.toUpperCase();
 
 		for (int i = 0; i < validColors.length; i++) {
@@ -141,7 +142,7 @@ public class BalloonTest {
 	}
 
 	// create a balloon ArrayList
-	public ArrayList<Balloon> balloonArray() {
+	public static ArrayList<Balloon> balloonArray() {
 		ArrayList<Balloon> balloons = new ArrayList<Balloon>();
 
 		return balloons;
