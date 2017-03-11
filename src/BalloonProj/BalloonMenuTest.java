@@ -21,14 +21,19 @@ public class BalloonMenuTest {
 	}
 
 	public static void listCreatedBalloons(ArrayList<Balloon> balloonArray) {
-
-		for (int i = 0; i < balloonArray.size(); i++) {
-			System.out.println("\nBalloon " + (i + 1) + BalloonTest.toString(balloonArray.get(i)));
+		if(balloonArray.size() > 0) {
+			for (int i = 0; i < balloonArray.size(); i++) {
+				System.out.println("\nBalloon " + (i + 1) + BalloonTest.toString(balloonArray.get(i)));
+			}	
+		} else {
+			System.out.println("\nYou currently have no balloons created!");
 		}
+			
 	}
 
 	public static void printCurrentAmount(ArrayList<Balloon> balloonArray) {
-		System.out.println("You currently have: " + balloonArray.size() + " balloons created\n");
+
+		System.out.println("\nYou currently have: " + balloonArray.size() + " balloons created");
 
 	}
 	
